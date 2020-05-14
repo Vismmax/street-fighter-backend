@@ -33,8 +33,14 @@ const validateEmail = (email) => {
     return re.test(email);
 }
 
+const validatePhoneNumber = (phoneNumber) => {
+    let re = /\+380\d{9}/;
+    return re.test(phoneNumber);
+}
+
 exports.validateId = validateId;
 exports.removeExcessFields = removeExcessFields;
 exports.validateExistFields = validateExistFields;
 exports.validateEmptyFields = validateEmptyFields;
 exports.validateEmail = validateEmail;
+exports.validatePhoneNumber = validatePhoneNumber;
