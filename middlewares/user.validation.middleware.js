@@ -21,5 +21,10 @@ function validatePhoneNumber(phoneNumber) {
     return re.test(phoneNumber);
 }
 
+function validatePassword(password) {
+    let re = /.{3}/;
+    return re.test(password);
+}
+
 exports.createUserValid = createUserValid;
 exports.updateUserValid = updateUserValid;
