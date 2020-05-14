@@ -11,5 +11,10 @@ const updateUserValid = (req, res, next) => {
     next();
 }
 
+function validateEmail(email) {
+    let re = /^\w+([\.-]?\w+)*@gmail.com/;
+    return re.test(email);
+}
+
 exports.createUserValid = createUserValid;
 exports.updateUserValid = updateUserValid;
