@@ -1,4 +1,12 @@
 const { user } = require('../models/user');
+
+const { validateExistFields } = require('../services/validationService');
+const { validateEmptyFields } = require('../services/validationService');
+const { validateId } = require('../services/validationService');
+const { validateEmail } = require('../services/validationService');
+const { validatePhoneNumber } = require('../services/validationService');
+const { validatePassword } = require('../services/validationService');
+
 const createUserValid = (req, res, next) => {
     // TODO: Implement validatior for user entity during creation
 
@@ -11,19 +19,11 @@ const updateUserValid = (req, res, next) => {
     next();
 }
 
-function validateEmail(email) {
-    let re = /^\w+([\.-]?\w+)*@gmail.com/;
-    return re.test(email);
-}
-
-function validatePhoneNumber(phoneNumber) {
-    let re = /\+380\d{9}/;
-    return re.test(phoneNumber);
-}
-
-function validatePassword(password) {
-    let re = /.{3}/;
-    return re.test(password);
+function createError(message) {
+    return {
+        error: true,
+        message
+    }
 }
 
 exports.createUserValid = createUserValid;
