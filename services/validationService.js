@@ -28,7 +28,13 @@ const validateEmptyFields = (body) => {
     return true;
 }
 
+const validateEmail = (email) => {
+    let re = /^\w+([\.-]?\w+)*@gmail.com/;
+    return re.test(email);
+}
+
 exports.validateId = validateId;
 exports.removeExcessFields = removeExcessFields;
 exports.validateExistFields = validateExistFields;
 exports.validateEmptyFields = validateEmptyFields;
+exports.validateEmail = validateEmail;
