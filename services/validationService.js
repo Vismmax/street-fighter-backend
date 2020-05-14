@@ -14,5 +14,13 @@ const removeExcessFields = (body) => {
     return validUser;
 }
 
+const validateExistFields = (body) => {
+    for (let key in user) {
+        if (!(key in body) && key !== 'id') return key;
+    }
+    return true;
+}
+
 exports.validateId = validateId;
 exports.removeExcessFields = removeExcessFields;
+exports.validateExistFields = validateExistFields;
