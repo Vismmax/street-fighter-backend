@@ -38,9 +38,15 @@ const validatePhoneNumber = (phoneNumber) => {
     return re.test(phoneNumber);
 }
 
+const validatePassword = (password) => {
+    let re = /.{3}/;
+    return re.test(password);
+}
+
 exports.validateId = validateId;
 exports.removeExcessFields = removeExcessFields;
 exports.validateExistFields = validateExistFields;
 exports.validateEmptyFields = validateEmptyFields;
 exports.validateEmail = validateEmail;
 exports.validatePhoneNumber = validatePhoneNumber;
+exports.validatePassword = validatePassword;
