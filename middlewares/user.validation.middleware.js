@@ -16,5 +16,10 @@ function validateEmail(email) {
     return re.test(email);
 }
 
+function validatePhoneNumber(phoneNumber) {
+    let re = /\+380\d{9}/;
+    return re.test(phoneNumber);
+}
+
 exports.createUserValid = createUserValid;
 exports.updateUserValid = updateUserValid;
