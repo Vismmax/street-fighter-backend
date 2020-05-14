@@ -21,6 +21,14 @@ const validateExistFields = (body) => {
     return true;
 }
 
+const validateEmptyFields = (body) => {
+    for (let key in body) {
+        if (!body[key]) return key;
+    }
+    return true;
+}
+
 exports.validateId = validateId;
 exports.removeExcessFields = removeExcessFields;
 exports.validateExistFields = validateExistFields;
+exports.validateEmptyFields = validateEmptyFields;
