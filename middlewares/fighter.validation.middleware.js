@@ -40,5 +40,22 @@ const updateFighterValid = (req, res, next) => {
     next();
 }
 
+function validationFighter(fighter) {
+    let existField = validateExistFields(fighter);
+    let emptyFields = validateEmptyFields(fighter);
+    if (!validateId(fighter)) {
+        return Error(`User entity to create isn't valid. Exist field "id"`);
+    } else if (existField !== true) {
+        return Error(`User entity to create isn't valid. No field "${existField}"`);
+    } else if (emptyFields !== true) {
+        return Error(`User entity to create isn't valid. Empty field ${emptyFields}`);
+    } else if (!validatePower(fighter.power)) {
+        return Error(`User entity to create isn't valid. Incorrect power`);
+    } else if (!validateDefense(fighter.defense)) {
+        return Error(`User entity to create isn't valid. Incorrect defense`);
+    }
+    return false;
+}
+
 exports.createFighterValid = createFighterValid;
 exports.updateFighterValid = updateFighterValid;
