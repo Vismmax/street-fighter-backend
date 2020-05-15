@@ -20,7 +20,15 @@ router.get('/', (req, res, next) => {
 }, responseMiddleware);
 
 router.get('/:id', (req, res, next) => {
-    console.log('get id');
+    try {
+        let data = FighterService.getFighter({id: req.params.id});
+        res.data = data;
+    } catch (err) {
+        res.err = err;
+        res.err.status = 404;
+    } finally {
+        next();
+    }
 }, responseMiddleware);
 
 router.post('/', createFighterValid, (req, res, next) => {
