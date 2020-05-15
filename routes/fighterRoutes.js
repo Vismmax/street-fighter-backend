@@ -32,8 +32,6 @@ router.get('/:id', (req, res, next) => {
 }, responseMiddleware);
 
 router.post('/', createFighterValid, (req, res, next) => {
-    console.log('post');
-    console.log(req.body);
     try {
         if (!res.err) {
             let data = FighterService.create(req.body);
