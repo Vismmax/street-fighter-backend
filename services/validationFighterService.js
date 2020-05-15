@@ -31,12 +31,12 @@ const validateEmptyFields = (body) => {
 
 const validatePower = (power) => {
     let pw = parseInt(power);
-    return !(pw < 1 && pw > 100);
+    return !(pw < 1 || pw > 100);
 }
 
 const validateDefense = (defense) => {
     let def = parseInt(defense);
-    return !(def < 0 && def > 100);
+    return !(def < 0 || def > 100);
 }
 
 const validateExistFighter = (body) => {
