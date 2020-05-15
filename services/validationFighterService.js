@@ -44,4 +44,3 @@ exports.validateExistFields = validateExistFields;
 exports.validateEmptyFields = validateEmptyFields;
 exports.validatePower = validatePower;
 exports.validateDefense = validateDefense;
-exports.validateExistFighter = validateExistFighter;
