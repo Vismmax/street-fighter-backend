@@ -8,7 +8,6 @@ const router = Router();
 // TODO: Implement route controllers for fighter
 
 router.get('/', (req, res, next) => {
-    console.log('get');
     try {
         let data = FighterService.getFighters();
         res.data = data;
