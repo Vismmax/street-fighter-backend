@@ -13,14 +13,17 @@ class UserService {
         return item;
     }
 
-    create(user) {
-        const data = removeExcessFields(user);
+    create(userData) {
+        const data = removeExcessFields(userData);
         try {
-            return UserRepository.create(data);
+            let user = UserRepository.create(data);
+            if (!user) {
+                throw Error('User not saved');
+            }
+            return user;
         }
         catch (error) {
-            console.error(error);
-            return false;
+            throw Error('User not saved');
         }
     }
 }
