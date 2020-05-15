@@ -1,4 +1,5 @@
 const { UserRepository } = require('../repositories/userRepository');
+const { removeExcessFields } = require('../services/validationService');
 
 class UserService {
 
@@ -10,6 +11,17 @@ class UserService {
             return null;
         }
         return item;
+    }
+
+    create(user) {
+        const data = removeExcessFields(user);
+        try {
+            return UserRepository.create(data);
+        }
+        catch (error) {
+            console.error(error);
+            return false;
+        }
     }
 }
 
