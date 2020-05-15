@@ -51,6 +51,20 @@ class FighterService {
             throw Error('Fighter not saved');
         }
     }
+
+    update(id, fighterData) {
+        const data = removeExcessFields(fighterData);
+        try {
+            let fighter = FighterRepository.update(id, data);
+            if (!fighter) {
+                throw Error('Fighter not updated');
+            }
+            return fighter;
+        }
+        catch (error) {
+            throw Error('Fighter not updated');
+        }
+    }
 }
 
 module.exports = new FighterService();
