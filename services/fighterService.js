@@ -25,6 +25,19 @@ class FighterService {
         }
     }
 
+    getFighter(fighterData) {
+        try {
+            let fighter = FighterRepository.getOne(fighterData);
+            if (!fighter) {
+                throw Error('Fighter not found');
+            }
+            return fighter;
+        }
+        catch (error) {
+            throw Error('Fighter not found');
+        }
+    }
+
     create(fighterData) {
         const data = removeExcessFields(fighterData);
         try {
