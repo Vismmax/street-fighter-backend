@@ -6,7 +6,7 @@ const { validateId } = require('../services/validationService');
 const { validateEmail } = require('../services/validationService');
 const { validatePhoneNumber } = require('../services/validationService');
 const { validatePassword } = require('../services/validationService');
-const { createError } = require('../services/errorService');
+const { validateExistUser } = require('../services/validationService');
 
 const createUserValid = (req, res, next) => {
     // TODO: Implement validatior for user entity during creation
@@ -30,6 +30,9 @@ const createUserValid = (req, res, next) => {
         res.err.status = 400;
     } else if (!validatePassword(req.body.password)) {
         res.err = Error(`User entity to create isn't valid. Incorrect password`);
+        res.err.status = 400;
+    } else if (!validateExistUser(req.body)) {
+        res.err = Error(`User entity to create isn't valid. User exist`);
         res.err.status = 400;
     }
 
