@@ -41,14 +41,14 @@ class FighterService {
     create(fighterData) {
         const data = removeExcessFields(fighterData);
         try {
-            let user = FighterRepository.create(data);
-            if (!user) {
-                throw Error('User not saved');
+            let fighter = FighterRepository.create(data);
+            if (!fighter) {
+                throw Error('Fighter not saved');
             }
-            return user;
+            return fighter;
         }
         catch (error) {
-            throw Error('User not saved');
+            throw Error('Fighter not saved');
         }
     }
 }
