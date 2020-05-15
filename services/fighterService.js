@@ -1,12 +1,11 @@
-const { FighterRepository } = require('../repositories/fighterRepository');
-const { removeExcessFields } = require('../services/validationFighterService');
+const {FighterRepository} = require('../repositories/fighterRepository');
+const {removeExcessFields} = require('../services/validationFighterService');
 
 class FighterService {
-    // TODO: Implement methods to work with fighters
 
     search(search) {
         const item = FighterRepository.getOne(search);
-        if(!item) {
+        if (!item) {
             return null;
         }
         return item;
@@ -19,8 +18,7 @@ class FighterService {
                 throw Error('Fighters not found');
             }
             return fighters;
-        }
-        catch (error) {
+        } catch (error) {
             throw Error('Fighters not found');
         }
     }
@@ -32,8 +30,7 @@ class FighterService {
                 throw Error('Fighter not found');
             }
             return fighter;
-        }
-        catch (error) {
+        } catch (error) {
             throw Error('Fighter not found');
         }
     }
@@ -46,8 +43,7 @@ class FighterService {
                 throw Error('Fighter not saved');
             }
             return fighter;
-        }
-        catch (error) {
+        } catch (error) {
             throw Error('Fighter not saved');
         }
     }
@@ -60,8 +56,7 @@ class FighterService {
                 throw Error('Fighter not updated');
             }
             return fighter;
-        }
-        catch (error) {
+        } catch (error) {
             throw Error('Fighter not updated');
         }
     }
@@ -73,8 +68,7 @@ class FighterService {
                 throw Error('Fighter not deleted');
             }
             return fighter;
-        }
-        catch (error) {
+        } catch (error) {
             throw Error('Fighter not deleted');
         }
     }
