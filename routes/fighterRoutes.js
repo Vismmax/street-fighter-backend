@@ -45,8 +45,18 @@ router.post('/', createFighterValid, (req, res, next) => {
     }
 }, responseMiddleware);
 
-router.put('/:id', (req, res, next) => {
-    console.log('put');
+router.put('/:id', updateFighterValid, (req, res, next) => {
+    try {
+        if (!res.err) {
+            let data = FighterService.update(req.params.id, req.body);
+            res.data = data;
+        }
+    } catch (err) {
+        res.err = err;
+        res.err.status = 400;
+    } finally {
+        next();
+    }
 }, responseMiddleware);
 
 router.delete('/:id', (req, res, next) => {
