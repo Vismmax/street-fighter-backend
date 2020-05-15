@@ -7,8 +7,7 @@ const router = Router();
 
 router.get('/', (req, res, next) => {
     try {
-        let data = FighterService.getFighters();
-        res.data = data;
+        res.data = FighterService.getFighters();
     } catch (err) {
         res.err = err;
         res.err.status = 404;
@@ -19,8 +18,7 @@ router.get('/', (req, res, next) => {
 
 router.get('/:id', (req, res, next) => {
     try {
-        let data = FighterService.getFighter({id: req.params.id});
-        res.data = data;
+        res.data = FighterService.getFighter({id: req.params.id});
     } catch (err) {
         res.err = err;
         res.err.status = 404;
@@ -32,8 +30,7 @@ router.get('/:id', (req, res, next) => {
 router.post('/', createFighterValid, (req, res, next) => {
     try {
         if (!res.err) {
-            let data = FighterService.create(req.body);
-            res.data = data;
+            res.data = FighterService.create(req.body);
         }
     } catch (err) {
         res.err = err;
@@ -46,8 +43,7 @@ router.post('/', createFighterValid, (req, res, next) => {
 router.put('/:id', updateFighterValid, (req, res, next) => {
     try {
         if (!res.err) {
-            let data = FighterService.update(req.params.id, req.body);
-            res.data = data;
+            res.data = FighterService.update(req.params.id, req.body);
         }
     } catch (err) {
         res.err = err;
@@ -59,8 +55,7 @@ router.put('/:id', updateFighterValid, (req, res, next) => {
 
 router.delete('/:id', (req, res, next) => {
     try {
-        let data = FighterService.delete(req.params.id);
-        res.data = data;
+        res.data = FighterService.delete(req.params.id);
     } catch (err) {
         res.err = err;
         res.err.status = 400;
