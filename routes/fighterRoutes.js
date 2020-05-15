@@ -60,7 +60,15 @@ router.put('/:id', updateFighterValid, (req, res, next) => {
 }, responseMiddleware);
 
 router.delete('/:id', (req, res, next) => {
-    console.log('del');
+    try {
+        let data = FighterService.delete(req.params.id);
+        res.data = data;
+    } catch (err) {
+        res.err = err;
+        res.err.status = 400;
+    } finally {
+        next();
+    }
 }, responseMiddleware);
 
 module.exports = router;
