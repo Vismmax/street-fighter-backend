@@ -10,6 +10,7 @@ router.post('/login', (req, res, next) => {
         res.data = data;
     } catch (err) {
         res.err = err;
+        res.err.status = 404;
     } finally {
         next();
     }
