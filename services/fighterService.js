@@ -13,8 +13,16 @@ class FighterService {
     }
 
     getFighters() {
-        // const fighters = FighterRepository.getAll();
-        return FighterRepository.getAll();
+        try {
+            let fighters = FighterRepository.getAll();
+            if (!fighters) {
+                throw Error('Fighters not found');
+            }
+            return fighters;
+        }
+        catch (error) {
+            throw Error('Fighters not found');
+        }
     }
 
     create(fighterData) {
