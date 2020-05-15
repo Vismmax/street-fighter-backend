@@ -9,11 +9,13 @@ const router = Router();
 
 router.post('/', createUserValid, (req, res, next) => {
     try {
-        let data = UserService.create(req.body);
-        res.data = data;
+        if (!res.err) {
+            let data = UserService.create(req.body);
+            res.data = data;
+        }
     } catch (err) {
         res.err = err;
-        res.statusErr = 400;
+        res.err.status = 400;
     } finally {
         next();
     }
