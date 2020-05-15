@@ -7,4 +7,45 @@ const router = Router();
 
 // TODO: Implement route controllers for fighter
 
+router.get('/', (req, res, next) => {
+    console.log('get');
+    try {
+        let data = FighterService.getFighters();
+        res.data = data;
+    } catch (err) {
+        res.err = err;
+        res.err.status = 404;
+    } finally {
+        next();
+    }
+}, responseMiddleware);
+
+router.get('/:id', (req, res, next) => {
+    console.log('get id');
+}, responseMiddleware);
+
+router.post('/', createFighterValid, (req, res, next) => {
+    console.log('post');
+    console.log(req.body);
+    try {
+        if (!res.err) {
+            let data = FighterService.create(req.body);
+            res.data = data;
+        }
+    } catch (err) {
+        res.err = err;
+        res.err.status = 400;
+    } finally {
+        next();
+    }
+}, responseMiddleware);
+
+router.put('/:id', (req, res, next) => {
+    console.log('put');
+}, responseMiddleware);
+
+router.delete('/:id', (req, res, next) => {
+    console.log('del');
+}, responseMiddleware);
+
 module.exports = router;
