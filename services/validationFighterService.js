@@ -1,5 +1,4 @@
-const { fighter } = require('../models/fighter');
-const { FighterService } = require('../services/fighterService');
+const {fighter} = require('../models/fighter');
 
 const validateId = (body) => {
     return !('id' in body);
@@ -37,20 +36,6 @@ const validatePower = (power) => {
 const validateDefense = (defense) => {
     let def = parseInt(defense);
     return !(def < 0 || def > 100);
-}
-
-const validateExistFighter = (body) => {
-    if (body.name) {
-        try {
-            let data = FighterService.search(body);
-            if (data) {
-                return false;
-            }
-        } catch (err) {
-            return true;
-        }
-    }
-    return true;
 }
 
 exports.validateId = validateId;
