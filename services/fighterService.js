@@ -65,6 +65,19 @@ class FighterService {
             throw Error('Fighter not updated');
         }
     }
+
+    delete(id) {
+        try {
+            let fighter = FighterRepository.delete(id);
+            if (!fighter.length) {
+                throw Error('Fighter not deleted');
+            }
+            return fighter;
+        }
+        catch (error) {
+            throw Error('Fighter not deleted');
+        }
+    }
 }
 
 module.exports = new FighterService();
