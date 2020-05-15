@@ -21,7 +21,15 @@ const createFighterValid = (req, res, next) => {
 }
 
 const updateFighterValid = (req, res, next) => {
-    // TODO: Implement validatior for fighter entity during update
+    let err = validationFighter(req.body);
+    if (err) {
+        res.err = err;
+        res.err.status = 400;
+    } else if (!FighterService.search({id: req.params.id})) {
+        res.err = Error(`User entity to create isn't valid. Fighter not exist`);
+        res.err.status = 400;
+    }
+
     next();
 }
 
