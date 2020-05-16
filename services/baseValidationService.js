@@ -23,7 +23,7 @@ class BaseValidationService {
 
     validateExcessFields(body) {
         for (let key in body) {
-            if (!key in this.model) return key;
+            if (!(key in this.model)) return key;
         }
         return true;
     }
