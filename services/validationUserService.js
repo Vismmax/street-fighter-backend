@@ -1,52 +1,25 @@
-const { user } = require('../models/user');
+const {user} = require('../models/user');
+const {BaseValidationService} = require('../services/baseValidationService');
 
-const validateId = (body) => {
-    return !('id' in body);
-}
-
-const removeExcessFields = (body) => {
-    let validUser = {};
-    for (let key in body) {
-        if ((key in user) && key !== 'id') {
-            validUser[key] = body[key];
-        }
+class UserValidationService extends BaseValidationService {
+    constructor() {
+        super(user);
     }
-    return validUser;
-}
 
-const validateExistFields = (body) => {
-    for (let key in user) {
-        if (!(key in body) && key !== 'id') return key;
+    validateEmail(email) {
+        let re = /^\w+([\.-]?\w+)*@gmail.com/;
+        return re.test(email);
     }
-    return true;
-}
 
-const validateEmptyFields = (body) => {
-    for (let key in body) {
-        if (!body[key]) return key;
+    validatePhoneNumber(phoneNumber) {
+        let re = /\+380\d{9}/;
+        return re.test(phoneNumber);
     }
-    return true;
+
+    validatePassword(password) {
+        let re = /.{3}/;
+        return re.test(password);
+    }
 }
 
-const validateEmail = (email) => {
-    let re = /^\w+([\.-]?\w+)*@gmail.com/;
-    return re.test(email);
-}
-
-const validatePhoneNumber = (phoneNumber) => {
-    let re = /\+380\d{9}/;
-    return re.test(phoneNumber);
-}
-
-const validatePassword = (password) => {
-    let re = /.{3}/;
-    return re.test(password);
-}
-
-exports.validateId = validateId;
-exports.removeExcessFields = removeExcessFields;
-exports.validateExistFields = validateExistFields;
-exports.validateEmptyFields = validateEmptyFields;
-exports.validateEmail = validateEmail;
-exports.validatePhoneNumber = validatePhoneNumber;
-exports.validatePassword = validatePassword;
+exports.UserValidationService = new UserValidationService();
