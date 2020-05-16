@@ -1,5 +1,5 @@
 const {UserRepository} = require('../repositories/userRepository');
-const {UserValidationService} = require('../services/validationUserService');
+const {UserValidationService} = require('./userValidationService');
 
 class UserService {
 

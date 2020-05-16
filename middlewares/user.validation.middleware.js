@@ -1,5 +1,5 @@
 const {user} = require('../models/user');
-const {UserValidationService} = require('../services/validationUserService');
+const {UserValidationService} = require('../services/userValidationService');
 const UserService = require('../services/userService');
 
 const createUserValid = (req, res, next) => {
