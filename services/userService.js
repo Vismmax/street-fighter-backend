@@ -1,5 +1,5 @@
 const {UserRepository} = require('../repositories/userRepository');
-const {removeExcessFields} = require('../services/validationService');
+const {removeExcessFields} = require('./validationUserService');
 
 class UserService {
 

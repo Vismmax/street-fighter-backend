@@ -1,12 +1,12 @@
 const {user} = require('../models/user');
 const UserService = require('../services/userService');
 
-const {validateExistFields} = require('../services/validationService');
-const {validateEmptyFields} = require('../services/validationService');
-const {validateId} = require('../services/validationService');
-const {validateEmail} = require('../services/validationService');
-const {validatePhoneNumber} = require('../services/validationService');
-const {validatePassword} = require('../services/validationService');
+const {validateExistFields} = require('../services/validationUserService');
+const {validateEmptyFields} = require('../services/validationUserService');
+const {validateId} = require('../services/validationUserService');
+const {validateEmail} = require('../services/validationUserService');
+const {validatePhoneNumber} = require('../services/validationUserService');
+const {validatePassword} = require('../services/validationUserService');
 
 const createUserValid = (req, res, next) => {
     let err = validationUser(req.body, 'create');
