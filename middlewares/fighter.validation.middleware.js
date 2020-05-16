@@ -1,11 +1,6 @@
-const { fighter } = require('../models/fighter');
+const {fighter} = require('../models/fighter');
+const {FighterValidationService} = require('../services/validationFighterService');
 const FighterService = require('../services/fighterService');
-
-const { validateExistFields } = require('../services/validationFighterService');
-const { validateEmptyFields } = require('../services/validationFighterService');
-const { validateId } = require('../services/validationFighterService');
-const { validatePower } = require('../services/validationFighterService');
-const { validateDefense } = require('../services/validationFighterService');
 
 const createFighterValid = (req, res, next) => {
     let err = validationFighter(req.body, 'create');
@@ -34,17 +29,17 @@ const updateFighterValid = (req, res, next) => {
 }
 
 function validationFighter(fighter, action) {
-    let existField = validateExistFields(fighter);
-    let emptyFields = validateEmptyFields(fighter);
-    if (!validateId(fighter)) {
+    let existField = FighterValidationService.validateExistFields(fighter);
+    let emptyFields = FighterValidationService.validateEmptyFields(fighter);
+    if (!FighterValidationService.validateId(fighter)) {
         return Error(`Fighter entity to ${action} isn't valid. Exist field "id"`);
     } else if (existField !== true) {
         return Error(`Fighter entity to ${action} isn't valid. No field "${existField}"`);
     } else if (emptyFields !== true) {
         return Error(`Fighter entity to ${action} isn't valid. Empty field ${emptyFields}`);
-    } else if (!validatePower(fighter.power)) {
+    } else if (!FighterValidationService.validatePower(fighter.power)) {
         return Error(`Fighter entity to ${action} isn't valid. Incorrect power`);
-    } else if (!validateDefense(fighter.defense)) {
+    } else if (!FighterValidationService.validateDefense(fighter.defense)) {
         return Error(`Fighter entity to ${action} isn't valid. Incorrect defense`);
     }
     return false;
