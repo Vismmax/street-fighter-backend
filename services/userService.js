@@ -1,5 +1,5 @@
 const {UserRepository} = require('../repositories/userRepository');
-const {removeExcessFields} = require('./validationUserService');
+const {UserValidationService} = require('../services/validationUserService');
 
 class UserService {
 
@@ -36,7 +36,7 @@ class UserService {
     }
 
     create(userData) {
-        const data = removeExcessFields(userData);
+        const data = UserValidationService.removeExcessFields(userData);
         try {
             let user = UserRepository.create(data);
             if (!user) {
@@ -49,7 +49,7 @@ class UserService {
     }
 
     update(id, userData) {
-        const data = removeExcessFields(userData);
+        const data = UserValidationService.removeExcessFields(userData);
         try {
             let user = UserRepository.update(id, data);
             if (!user) {
