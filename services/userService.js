@@ -25,6 +25,18 @@ class UserService {
         }
     }
 
+    getUser(userData) {
+        try {
+            let user = UserRepository.getOne(userData);
+            if (!user) {
+                throw Error('User not found');
+            }
+            return user;
+        } catch (error) {
+            throw Error('User not found');
+        }
+    }
+
     create(userData) {
         const data = removeExcessFields(userData);
         try {
