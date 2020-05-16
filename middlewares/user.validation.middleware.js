@@ -9,29 +9,11 @@ const { validatePassword } = require('../services/validationService');
 const { validateExistUser } = require('../services/validationService');
 
 const createUserValid = (req, res, next) => {
-    // TODO: Implement validatior for user entity during creation
-    
-    let existField = validateExistFields(req.body);
-    let emptyFields = validateEmptyFields(req.body);
-    if (!validateId(req.body)) {
-        res.err = Error(`User entity to create isn't valid. Exist field "id"`);
+    let err = validationUser(req.body);
+    if (err) {
+        res.err = err;
         res.err.status = 400;
-    } else if (existField !== true) {
-        res.err = Error(`User entity to create isn't valid. No field "${existField}"`);
-        res.err.status = 400;
-    } else if (emptyFields !== true) {
-        res.err = Error(`User entity to create isn't valid. Empty field ${emptyFields}`);
-        res.err.status = 400;
-    } else if (!validateEmail(req.body.email)) {
-        res.err = Error(`User entity to create isn't valid. Incorrect email`);
-        res.err.status = 400;
-    } else if (!validatePhoneNumber(req.body.phoneNumber)) {
-        res.err = Error(`User entity to create isn't valid. Incorrect phone number`);
-        res.err.status = 400;
-    } else if (!validatePassword(req.body.password)) {
-        res.err = Error(`User entity to create isn't valid. Incorrect password`);
-        res.err.status = 400;
-    } else if (!validateExistUser(req.body)) {
+    } else if (UserService.search({email: req.body.email})) {
         res.err = Error(`User entity to create isn't valid. User exist`);
         res.err.status = 400;
     }
