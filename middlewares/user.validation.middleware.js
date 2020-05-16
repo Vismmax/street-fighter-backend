@@ -1,12 +1,12 @@
-const { user } = require('../models/user');
+const {user} = require('../models/user');
 
-const { validateExistFields } = require('../services/validationService');
-const { validateEmptyFields } = require('../services/validationService');
-const { validateId } = require('../services/validationService');
-const { validateEmail } = require('../services/validationService');
-const { validatePhoneNumber } = require('../services/validationService');
-const { validatePassword } = require('../services/validationService');
-const { validateExistUser } = require('../services/validationService');
+const {validateExistFields} = require('../services/validationService');
+const {validateEmptyFields} = require('../services/validationService');
+const {validateId} = require('../services/validationService');
+const {validateEmail} = require('../services/validationService');
+const {validatePhoneNumber} = require('../services/validationService');
+const {validatePassword} = require('../services/validationService');
+const {validateExistUser} = require('../services/validationService');
 
 const createUserValid = (req, res, next) => {
     let err = validationUser(req.body);
@@ -22,7 +22,14 @@ const createUserValid = (req, res, next) => {
 }
 
 const updateUserValid = (req, res, next) => {
-    // TODO: Implement validatior for user entity during update
+    let err = validationUser(req.body);
+    if (err) {
+        res.err = err;
+        res.err.status = 400;
+    } else if (!UserService.search({id: req.params.id})) {
+        res.err = Error(`User entity to create isn't valid. User not exist`);
+        res.err.status = 400;
+    }
 
     next();
 }
