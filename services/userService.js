@@ -50,6 +50,19 @@ class UserService {
             throw Error('User not saved');
         }
     }
+
+    update(id, userData) {
+        const data = removeExcessFields(userData);
+        try {
+            let user = UserRepository.update(id, data);
+            if (!user) {
+                throw Error('User not updated');
+            }
+            return user;
+        } catch (error) {
+            throw Error('User not updated');
+        }
+    }
 }
 
 module.exports = new UserService();
