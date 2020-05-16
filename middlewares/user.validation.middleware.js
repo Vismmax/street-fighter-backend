@@ -31,12 +31,15 @@ const updateUserValid = (req, res, next) => {
 function validationUser(user, action) {
     let existField = UserValidationService.validateExistFields(user);
     let emptyFields = UserValidationService.validateEmptyFields(user);
+    let excessFields = UserValidationService.validateExcessFields(user);
     if (!UserValidationService.validateId(user)) {
         return Error(`User entity to ${action} isn't valid. Exist field "id"`);
     } else if (existField !== true) {
         return Error(`User entity to ${action} isn't valid. No field "${existField}"`);
     } else if (emptyFields !== true) {
         return Error(`User entity to ${action} isn't valid. Empty field ${emptyFields}`);
+    } else if (excessFields !== true) {
+        return Error(`User entity to ${action} isn't valid. Excess field ${excessFields}`);
     } else if (!UserValidationService.validateEmail(user.email)) {
         return Error(`User entity to ${action} isn't valid. Incorrect email`);
     } else if (!UserValidationService.validatePhoneNumber(user.phoneNumber)) {

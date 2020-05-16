@@ -21,6 +21,13 @@ class BaseValidationService {
         return true;
     }
 
+    validateExcessFields(body) {
+        for (let key in body) {
+            if (!key in this.model) return key;
+        }
+        return true;
+    }
+
     removeExcessFields = (body) => {
         let validUser = {};
         for (let key in body) {

@@ -31,12 +31,15 @@ const updateFighterValid = (req, res, next) => {
 function validationFighter(fighter, action) {
     let existField = FighterValidationService.validateExistFields(fighter);
     let emptyFields = FighterValidationService.validateEmptyFields(fighter);
+    let excessFields = FighterValidationService.validateExcessFields(fighter);
     if (!FighterValidationService.validateId(fighter)) {
         return Error(`Fighter entity to ${action} isn't valid. Exist field "id"`);
     } else if (existField !== true) {
         return Error(`Fighter entity to ${action} isn't valid. No field "${existField}"`);
     } else if (emptyFields !== true) {
         return Error(`Fighter entity to ${action} isn't valid. Empty field ${emptyFields}`);
+    } else if (excessFields !== true) {
+        return Error(`Fighter entity to ${action} isn't valid. Excess field ${excessFields}`);
     } else if (!FighterValidationService.validatePower(fighter.power)) {
         return Error(`Fighter entity to ${action} isn't valid. Incorrect power`);
     } else if (!FighterValidationService.validateDefense(fighter.defense)) {
