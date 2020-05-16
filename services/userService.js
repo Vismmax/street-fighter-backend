@@ -13,6 +13,18 @@ class UserService {
         return item;
     }
 
+    getUsers() {
+        try {
+            let users = UserRepository.getAll();
+            if (!userss) {
+                throw Error('Users not found');
+            }
+            return users;
+        } catch (error) {
+            throw Error('Users not found');
+        }
+    }
+
     create(userData) {
         const data = removeExcessFields(userData);
         try {
