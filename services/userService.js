@@ -14,7 +14,7 @@ class UserService {
     getUsers() {
         try {
             let users = UserRepository.getAll();
-            if (!userss) {
+            if (!users) {
                 throw Error('Users not found');
             }
             return users;
