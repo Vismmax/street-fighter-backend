@@ -45,5 +45,24 @@ const updateUserValid = (req, res, next) => {
     next();
 }
 
+function validationUser(user) {
+    let existField = validateExistFields(user);
+    let emptyFields = validateEmptyFields(user);
+    if (!validateId(user)) {
+        return Error(`User entity to create isn't valid. Exist field "id"`);
+    } else if (existField !== true) {
+        return Error(`User entity to create isn't valid. No field "${existField}"`);
+    } else if (emptyFields !== true) {
+        return Error(`User entity to create isn't valid. Empty field ${emptyFields}`);
+    } else if (!validateEmail(user.email)) {
+        return Error(`User entity to create isn't valid. Incorrect email`);
+    } else if (!validatePhoneNumber(user.phoneNumber)) {
+        return Error(`User entity to create isn't valid. Incorrect phone number`);
+    } else if (!validatePassword(user.password)) {
+        return Error(`User entity to create isn't valid. Incorrect password`);
+    }
+    return false;
+}
+
 exports.createUserValid = createUserValid;
 exports.updateUserValid = updateUserValid;
