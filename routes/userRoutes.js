@@ -7,15 +7,12 @@ const router = Router();
 
 // TODO: Implement route controllers for user
 
-router.post('/', createUserValid, (req, res, next) => {
+router.get('/', (req, res, next) => {
     try {
-        if (!res.err) {
-            let data = UserService.create(req.body);
-            res.data = data;
-        }
+        res.data = UserService.getUsers();
     } catch (err) {
         res.err = err;
-        res.err.status = 400;
+        res.err.status = 404;
     } finally {
         next();
     }
