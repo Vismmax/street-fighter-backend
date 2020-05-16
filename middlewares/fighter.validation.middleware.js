@@ -1,5 +1,5 @@
 const {fighter} = require('../models/fighter');
-const {FighterValidationService} = require('../services/validationFighterService');
+const {FighterValidationService} = require('../services/fighterValidationService');
 const FighterService = require('../services/fighterService');
 
 const createFighterValid = (req, res, next) => {

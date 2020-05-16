@@ -1,5 +1,5 @@
 const {FighterRepository} = require('../repositories/fighterRepository');
-const {FighterValidationService} = require('../services/validationFighterService');
+const {FighterValidationService} = require('./fighterValidationService');
 
 class FighterService {
 
