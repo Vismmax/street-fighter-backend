@@ -18,4 +18,15 @@ router.get('/', (req, res, next) => {
     }
 }, responseMiddleware);
 
+router.get('/:id', (req, res, next) => {
+    try {
+        res.data = UserService.getUser({id: req.params.id});
+    } catch (err) {
+        res.err = err;
+        res.err.status = 404;
+    } finally {
+        next();
+    }
+}, responseMiddleware);
+
 module.exports = router;
