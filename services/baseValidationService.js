@@ -28,7 +28,7 @@ class BaseValidationService {
         return true;
     }
 
-    removeExcessFields = (body) => {
+    removeExcessFields(body) {
         let validUser = {};
         for (let key in body) {
             if ((key in this.model) && key !== 'id') {
