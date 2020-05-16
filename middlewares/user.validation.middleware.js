@@ -1,12 +1,6 @@
 const {user} = require('../models/user');
+const {UserValidationService} = require('../services/validationUserService');
 const UserService = require('../services/userService');
-
-const {validateExistFields} = require('../services/validationUserService');
-const {validateEmptyFields} = require('../services/validationUserService');
-const {validateId} = require('../services/validationUserService');
-const {validateEmail} = require('../services/validationUserService');
-const {validatePhoneNumber} = require('../services/validationUserService');
-const {validatePassword} = require('../services/validationUserService');
 
 const createUserValid = (req, res, next) => {
     let err = validationUser(req.body, 'create');
@@ -35,19 +29,19 @@ const updateUserValid = (req, res, next) => {
 }
 
 function validationUser(user, action) {
-    let existField = validateExistFields(user);
-    let emptyFields = validateEmptyFields(user);
-    if (!validateId(user)) {
+    let existField = UserValidationService.validateExistFields(user);
+    let emptyFields = UserValidationService.validateEmptyFields(user);
+    if (!UserValidationService.validateId(user)) {
         return Error(`User entity to ${action} isn't valid. Exist field "id"`);
     } else if (existField !== true) {
         return Error(`User entity to ${action} isn't valid. No field "${existField}"`);
     } else if (emptyFields !== true) {
         return Error(`User entity to ${action} isn't valid. Empty field ${emptyFields}`);
-    } else if (!validateEmail(user.email)) {
+    } else if (!UserValidationService.validateEmail(user.email)) {
         return Error(`User entity to ${action} isn't valid. Incorrect email`);
-    } else if (!validatePhoneNumber(user.phoneNumber)) {
+    } else if (!UserValidationService.validatePhoneNumber(user.phoneNumber)) {
         return Error(`User entity to ${action} isn't valid. Incorrect phone number`);
-    } else if (!validatePassword(user.password)) {
+    } else if (!UserValidationService.validatePassword(user.password)) {
         return Error(`User entity to ${action} isn't valid. Incorrect password`);
     }
     return false;
