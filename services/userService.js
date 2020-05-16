@@ -1,13 +1,11 @@
-const { UserRepository } = require('../repositories/userRepository');
-const { removeExcessFields } = require('../services/validationService');
+const {UserRepository} = require('../repositories/userRepository');
+const {removeExcessFields} = require('../services/validationService');
 
 class UserService {
 
-    // TODO: Implement methods to work with user
-
     search(search) {
         const item = UserRepository.getOne(search);
-        if(!item) {
+        if (!item) {
             return null;
         }
         return item;
@@ -45,8 +43,7 @@ class UserService {
                 throw Error('User not saved');
             }
             return user;
-        }
-        catch (error) {
+        } catch (error) {
             throw Error('User not saved');
         }
     }
@@ -61,6 +58,18 @@ class UserService {
             return user;
         } catch (error) {
             throw Error('User not updated');
+        }
+    }
+
+    delete(id) {
+        try {
+            let user = UserRepository.delete(id);
+            if (!user.length) {
+                throw Error('User not deleted');
+            }
+            return user;
+        } catch (error) {
+            throw Error('User not deleted');
         }
     }
 }
