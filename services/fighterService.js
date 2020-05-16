@@ -1,5 +1,5 @@
 const {FighterRepository} = require('../repositories/fighterRepository');
-const {removeExcessFields} = require('../services/validationFighterService');
+const {FighterValidationService} = require('../services/validationFighterService');
 
 class FighterService {
 
@@ -36,7 +36,7 @@ class FighterService {
     }
 
     create(fighterData) {
-        const data = removeExcessFields(fighterData);
+        const data = FighterValidationService.removeExcessFields(fighterData);
         try {
             let fighter = FighterRepository.create(data);
             if (!fighter) {
@@ -49,7 +49,7 @@ class FighterService {
     }
 
     update(id, fighterData) {
-        const data = removeExcessFields(fighterData);
+        const data = FighterValidationService.removeExcessFields(fighterData);
         try {
             let fighter = FighterRepository.update(id, data);
             if (!fighter) {
