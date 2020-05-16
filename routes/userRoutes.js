@@ -29,4 +29,17 @@ router.get('/:id', (req, res, next) => {
     }
 }, responseMiddleware);
 
+router.post('/', createUserValid, (req, res, next) => {
+    try {
+        if (!res.err) {
+            res.data = UserService.create(req.body);
+        }
+    } catch (err) {
+        res.err = err;
+        res.err.status = 400;
+    } finally {
+        next();
+    }
+}, responseMiddleware);
+
 module.exports = router;
