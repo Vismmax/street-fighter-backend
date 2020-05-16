@@ -42,4 +42,17 @@ router.post('/', createUserValid, (req, res, next) => {
     }
 }, responseMiddleware);
 
+router.put('/:id', updateUserValid, (req, res, next) => {
+    try {
+        if (!res.err) {
+            res.data = UserService.update(req.params.id, req.body);
+        }
+    } catch (err) {
+        res.err = err;
+        res.err.status = 400;
+    } finally {
+        next();
+    }
+}, responseMiddleware);
+
 module.exports = router;
