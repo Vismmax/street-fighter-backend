@@ -34,17 +34,17 @@ function validationUser(user, action) {
     let excessFields = UserValidationService.validateExcessFields(user);
     if (!UserValidationService.validateId(user)) {
         return Error(`User entity to ${action} isn't valid. Exist field "id"`);
-    } else if (existField !== true) {
+    } else if (existField !== true && action === 'create') {
         return Error(`User entity to ${action} isn't valid. No field "${existField}"`);
-    } else if (emptyFields !== true) {
+    } else if (emptyFields !== true && action === 'create') {
         return Error(`User entity to ${action} isn't valid. Empty field ${emptyFields}`);
     } else if (excessFields !== true) {
         return Error(`User entity to ${action} isn't valid. Excess field ${excessFields}`);
-    } else if (!UserValidationService.validateEmail(user.email)) {
+    } else if (user.email && !UserValidationService.validateEmail(user.email)) {
         return Error(`User entity to ${action} isn't valid. Incorrect email`);
-    } else if (!UserValidationService.validatePhoneNumber(user.phoneNumber)) {
+    } else if (user.phoneNumber && !UserValidationService.validatePhoneNumber(user.phoneNumber)) {
         return Error(`User entity to ${action} isn't valid. Incorrect phone number`);
-    } else if (!UserValidationService.validatePassword(user.password)) {
+    } else if (user.password && !UserValidationService.validatePassword(user.password)) {
         return Error(`User entity to ${action} isn't valid. Incorrect password`);
     }
     return false;

@@ -38,11 +38,11 @@ function validationFight(fight, action) {
     let emptyFields = FightValidationService.validateEmptyFields(fight);
     if (!FightValidationService.validateId(fight)) {
         return Error(`Fight entity to ${action} isn't valid. Exist field "id"`);
-    } else if (existField !== true) {
+    } else if (existField !== true && action === 'create') {
         return Error(`Fight entity to ${action} isn't valid. No field "${existField}"`);
-    } else if (emptyFields !== true) {
+    } else if (emptyFields !== true && action === 'create') {
         return Error(`Fight entity to ${action} isn't valid. Empty field ${emptyFields}`);
-    } else if (!FightValidationService.validateLog(fight.log)) {
+    } else if (fight.log && !FightValidationService.validateLog(fight.log)) {
         return Error(`Fight entity to ${action} isn't valid. Incorrect "log"`);
     }
     return false;

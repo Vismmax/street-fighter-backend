@@ -34,15 +34,15 @@ function validationFighter(fighter, action) {
     let excessFields = FighterValidationService.validateExcessFields(fighter);
     if (!FighterValidationService.validateId(fighter)) {
         return Error(`Fighter entity to ${action} isn't valid. Exist field "id"`);
-    } else if (existField !== true) {
+    } else if (existField !== true && action === 'create') {
         return Error(`Fighter entity to ${action} isn't valid. No field "${existField}"`);
-    } else if (emptyFields !== true) {
+    } else if (emptyFields !== true && action === 'create') {
         return Error(`Fighter entity to ${action} isn't valid. Empty field ${emptyFields}`);
     } else if (excessFields !== true) {
         return Error(`Fighter entity to ${action} isn't valid. Excess field ${excessFields}`);
-    } else if (!FighterValidationService.validatePower(fighter.power)) {
+    } else if (fighter.power && !FighterValidationService.validatePower(fighter.power)) {
         return Error(`Fighter entity to ${action} isn't valid. Incorrect power`);
-    } else if (!FighterValidationService.validateDefense(fighter.defense)) {
+    } else if (fighter.defense && !FighterValidationService.validateDefense(fighter.defense)) {
         return Error(`Fighter entity to ${action} isn't valid. Incorrect defense`);
     }
     return false;
