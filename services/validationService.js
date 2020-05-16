@@ -1,5 +1,4 @@
 const { user } = require('../models/user');
-const UserService = require('../services/userService');
 
 const validateId = (body) => {
     return !('id' in body);
@@ -44,20 +43,6 @@ const validatePassword = (password) => {
     return re.test(password);
 }
 
-const validateExistUser = (body) => {
-    if (body.email && body.password) {
-        try {
-            let data = UserService.search(body);
-            if (data) {
-                return false;
-            }
-        } catch (err) {
-            return true;
-        }
-    }
-    return true;
-}
-
 exports.validateId = validateId;
 exports.removeExcessFields = removeExcessFields;
 exports.validateExistFields = validateExistFields;
@@ -65,4 +50,3 @@ exports.validateEmptyFields = validateEmptyFields;
 exports.validateEmail = validateEmail;
 exports.validatePhoneNumber = validatePhoneNumber;
 exports.validatePassword = validatePassword;
-exports.validateExistUser = validateExistUser;
