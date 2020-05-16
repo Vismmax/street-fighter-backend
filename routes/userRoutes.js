@@ -55,4 +55,15 @@ router.put('/:id', updateUserValid, (req, res, next) => {
     }
 }, responseMiddleware);
 
+router.delete('/:id', (req, res, next) => {
+    try {
+        res.data = UserService.delete(req.params.id);
+    } catch (err) {
+        res.err = err;
+        res.err.status = 400;
+    } finally {
+        next();
+    }
+}, responseMiddleware);
+
 module.exports = router;
