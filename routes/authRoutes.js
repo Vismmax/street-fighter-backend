@@ -6,8 +6,7 @@ const router = Router();
 
 router.post('/login', (req, res, next) => {
     try {
-        let data = AuthService.login(req.body);
-        res.data = data;
+        res.data = AuthService.login(req.body);
     } catch (err) {
         res.err = err;
         res.err.status = 404;
